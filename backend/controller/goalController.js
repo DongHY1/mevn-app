@@ -9,14 +9,30 @@ const setGoals = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("请传入数据");
   }
-  // const goal = await
-  res.status(200).send("Get goals");
+  const goal = await Goal.create({
+    text: req.body.text,
+  });
+  res.status(200).json(goal);
 });
 const updateGoals = asyncHandler(async (req, res) => {
-  res.status(200).send(`Get goals ${req.params.id}`);
+  const goal = await Goal.findById(req.params.id);
+  if (!goal) {
+    res.status(400);
+    throw new Error("没有找到id对应数据");
+  }
+  const updateGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  res.status(200).json(updateGoal);
 });
 const deleteGoals = asyncHandler(async (req, res) => {
-  res.status(200).send(`Get goals ${req.params.id}`);
+  const goal = await Goal.findById(req.params.id);
+  if (!goal) {
+    res.status(400);
+    throw new Error("没有找到id对应数据");
+  }
+  await goal.remove()
+  res.status(200).json({id:req.params.id});
 });
 module.exports = {
   getGoals,
