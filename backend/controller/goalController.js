@@ -1,8 +1,12 @@
+
 const getGoals = (req,res)=>{
     res.status(200).send('Get goals')
 }
 const setGoals = (req,res)=>{
-    console.log(req.body)
+    if(!req.body.text){
+        res.status(400)
+        throw new Error('请传入数据')
+    }
     res.status(200).send('Get goals')
 }
 const updateGoals = (req,res)=>{
