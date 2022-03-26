@@ -37,6 +37,18 @@ const registerUser = asyncHandler(async(req,res)=>{
     
 })
 const loginUser = asyncHandler(async(req,res)=>{
+    const {email,password} = req.body
+    const user = await User.findOne({email})
+    if(user && (await bctypt.compare(password,user.password))){
+        res.json({
+            _id:user.id,
+            name:user.name,
+            email:user.email
+        })
+    }else{
+        res.status(400)
+        throw new Error('用户登录失败')
+    }
 
     res.status(200).json({message:'成功注册用户'});
 })
