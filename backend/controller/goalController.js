@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const Goal = require("../models/goalModel.js");
-
+const User = require("../models/userModel.js");
 const getGoals = asyncHandler(async (req, res) => {
-  const goals = await Goal.find();
+  const goals = await Goal.find({user:req.user.id});
   res.status(200).json(goals);
 });
 
@@ -13,6 +13,7 @@ const setGoals = asyncHandler(async (req, res) => {
   }
   const goal = await Goal.create({
     text: req.body.text,
+    user:req.user.id
   });
   res.status(200).json(goal);
 });
