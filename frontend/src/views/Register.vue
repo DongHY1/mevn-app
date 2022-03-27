@@ -37,7 +37,7 @@
 
 <script setup>
 import { NForm, NFormItem, NInput, NButton, useMessage } from 'naive-ui';
-import { reactive,ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useUserInfoStore } from '@/stores/userInfo';
 const formRef = ref(null);
 const message = useMessage()
@@ -94,7 +94,7 @@ function handleValidateClick(e) {
         if (!errors) {
             // 发送网络请求
             const userInfoStore = useUserInfoStore()
-            userInfoStore.userRegister({"name":formValue.name})
+            userInfoStore.userRegister({ "name": formValue.name, "email": formValue.email, "password": formValue.password })
             message.success("注册成功");
         } else {
             message.error("注册失败");
