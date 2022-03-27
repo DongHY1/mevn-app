@@ -28,10 +28,10 @@
 
 <script setup>
 import { NForm, NFormItem, NInput, NButton, useMessage } from 'naive-ui';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 const formRef = ref(null);
 const message = useMessage()
-const formValue = ref({
+const formValue = reactive({
     email: '',
     password: ''
 })

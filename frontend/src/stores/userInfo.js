@@ -1,20 +1,19 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { reactive } from "vue";
 export const useUserInfoStore = defineStore("userInfo", () => {
-  const user = ref("");
-  const isError = ref(false);
-  const isSuccess = ref(false);
-  const isLoading = ref(false);
-  const message = ref("");
+  const registerUserInfo = reactive({
+    user:'',
+    isError:false,
+    isSuccess:false,
+    isLoading:false,
+    message:''
+  })
   async function userRegister(payload){
+    registerUserInfo.user = payload.name
     console.log(payload)
   }
   return {
-    user,
-    isError,
-    isSuccess,
-    isLoading,
-    message,
+    registerUserInfo,
     userRegister
   };
 });
