@@ -12,7 +12,12 @@ const userSchema =  mongoose.Schema({
     password:{
         type:String,
         require:[true,'请加入密码']
-    }
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
 },{
     timestamps:true
 })
