@@ -24,4 +24,4 @@ const protect = asyncHandler(async (req,res,next)=>{
         throw new Error('未携带token')
     }
 })
-module.exports = protect
+module.exports = {protect}

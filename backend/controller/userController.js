@@ -55,7 +55,13 @@ const loginUser = asyncHandler(async(req,res)=>{
     res.status(200).json({message:'成功注册用户'});
 })
 const getMe = asyncHandler(async(req,res)=>{
-    res.status(200).json({message:'成功注册用户'});
+    const {_id,name,email} = await User.findById(req.user.id)
+    res.status(200).json({
+        id:_id,
+        name,
+        email   
+    })
+    
 })
 const generateToken = (id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{
